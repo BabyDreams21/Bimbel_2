@@ -149,6 +149,7 @@ namespace Bimbel_2
                 CRUD.crud(com,mode,pesan);
                 clear();
                 loadadmin();
+                disable();
 
             }
             else if (cond == 2 && valup())
@@ -162,6 +163,7 @@ namespace Bimbel_2
                 CRUD.crud(com, mode, pesan);
                 clear();
                 loadadmin();
+                disable();
 
             }
         }

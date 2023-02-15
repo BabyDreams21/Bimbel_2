@@ -18,6 +18,8 @@ namespace Bimbel_2
         private static string[] jadwalSesi1 = new string[Sesi1.Length];
         private static string[] jadwalSesi2 = new string[Sesi2.Length];
         private static int lPelajaran = pelajaran.Length;
+        private static Dictionary<string,object> jadwal = new Dictionary<string,object>();
+        private static Dictionary<string,string> minggu = new Dictionary<string,string>();
 
         void buatJadwal(string[] Sesi, string[] jadwal)
         {
@@ -39,8 +41,10 @@ namespace Bimbel_2
         public JadwalPelajaran()
         {
             InitializeComponent();
-            buatJadwal(Sesi1, jadwalSesi1);
-            buatJadwal(Sesi2, jadwalSesi2);
+            jadwal.Add("minggu1", minggu );
+            jadwal["minggu1"].Add("senin", "ipa");
+            //buatJadwal(Sesi1, jadwalSesi1);
+            //buatJadwal(Sesi2, jadwalSesi2);
 
         }
 

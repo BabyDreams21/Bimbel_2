@@ -44,7 +44,7 @@ namespace Bimbel_2
     {
         public static int ID { get; set; }
         public static int NIS { get; set; }
-        public static String Nama { get; set; }
+        public static string Nama { get; set; }
         public static String Email { get; set; }
         //ublic static int NIS { get; set; }
     }

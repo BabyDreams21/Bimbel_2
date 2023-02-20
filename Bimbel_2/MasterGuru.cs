@@ -26,6 +26,7 @@ namespace Bimbel_2
             loadguru();
             loadmapel();
             disable();
+            label8.Text = Session.Nama;
         }
 
         bool val()
@@ -167,7 +168,7 @@ namespace Bimbel_2
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            string com = "Select * from view_guru where nama like '%" + textBox4.Text + "%'";
+            string com = "Select * from view_guru where nama like '%" + textBox4.Text + "%' or [Mata Pelajaran] like '"+textBox4.Text+"' ";
             dataGridView1.DataSource = Command.GetData(com);
 
         }

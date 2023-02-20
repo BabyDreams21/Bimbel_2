@@ -42,10 +42,10 @@ namespace Bimbel_2
         {
             InitializeComponent();
             jadwal.Add("minggu1", minggu );
-            jadwal["minggu1"].Add("senin", "ipa");
-            //buatJadwal(Sesi1, jadwalSesi1);
+           // jadwal["minggu1"].Add("senin", "ipa");
+            buatJadwal(Sesi1, jadwalSesi1);
             //buatJadwal(Sesi2, jadwalSesi2);
-
+          //  MessageBox.Show(buatJadwal(Sesi1, jadwalSesi1));
         }
 
         private void button4_Click(object sender, EventArgs e)

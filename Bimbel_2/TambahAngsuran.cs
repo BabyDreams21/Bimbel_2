@@ -21,7 +21,7 @@ namespace Bimbel_2
         {
             PilihSiswa siswa = new PilihSiswa();
             siswa.ShowDialog();
-            textBox1.Text = siswa.namasiswa;
+            textBox1.Text = siswa.namasiswa;a
         }
     }
 }

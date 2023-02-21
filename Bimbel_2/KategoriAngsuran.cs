@@ -5,9 +5,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Bimbel_2
 {
@@ -25,6 +27,9 @@ namespace Bimbel_2
             loadgrid();
             loadcombo();
             disable();
+
+            dataGridView1.Columns[0].Visible= false;
+            dataGridView1.Columns[1].Visible= false;
         }
 
         bool val()
@@ -88,31 +93,23 @@ namespace Bimbel_2
 
         void loadcombo()
         {
+
             string com = "Select * from Paket";
-            comboBox1.DataSource= Command.GetData(com);
-            comboBox1.ValueMember = "idpaket";
             comboBox1.DisplayMember = "nama";
-            
+            comboBox1.ValueMember = "idpaket";
+            comboBox1.DataSource = Command.GetData(com);
         }
 
-        void loadharga()
+        void loaddetail()
         {
+            SqlCommand command = new SqlCommand("select * from Paket where idpaket = " + comboBox1.SelectedValue, con);
             con.Open();
-            int harga;
-            cmd = new SqlCommand("select * from Paket", con);
-            rd= cmd.ExecuteReader();
+            rd = command.ExecuteReader();
             rd.Read();
-            if (rd.HasRows)
-            {
-                for(int i = 0; i < rd.; i++)
-                {
-                    harga = Convert.ToInt32(rd[2]);
-                    textBox7.Text = harga.ToString();
-                }
-                
-            }
-           
+            textBox7.Text = rd.GetInt32(2).ToString();
+            //textBox2.Text = (Convert.ToInt32(textBox1.Text) * numericUpDown1.Value).ToString();
             con.Close();
+
         }
 
         void clear()
@@ -122,6 +119,7 @@ namespace Bimbel_2
             textBox3.Clear();
             textBox5.Clear();
             textBox6.Clear();
+            textBox7.Clear();
             comboBox1.Text = "";
            
         }
@@ -182,19 +180,23 @@ namespace Bimbel_2
         {
             if (cond == 1 && val())
             {
-                string com = "insert into Jenis_Angsuran values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox5.Text + "','" + textBox6.Text + "')";
+                string com = "insert into Jenis_Angsuran values ('"+comboBox1.SelectedValue+"','" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox5.Text + "','" + textBox6.Text + "')";
                 string mode = "Insert";
                 string pesan = "Insert";
                 CRUD.crud(com,mode, pesan);
+                loadgrid();
+
                 enable();
                 clear();
             }
-            else if (cond == 2 && val())
+            else if (cond == 2 && valup())
             {
-                string com = "update Jenis_Angsuran set nama ='"+textBox1.Text+"',keterrangan = '"+textBox2.Text+"',dp = '"+textBox3.Text+ "',besar_cicilan ='"+textBox5.Text+"',banyaknya_cicilan = '"+textBox6.Text+"'";
+                string com = "update Jenis_Angsuran set nama ='"+textBox1.Text+"',keterangan = '"+textBox2.Text+"',dp = '"+textBox3.Text+ "',besar_cicilan ='"+textBox5.Text+"',banyaknya_cicilan = '"+textBox6.Text+"'";
                 string mode = "Insert";
                 string pesan = "Update";
                 CRUD.crud(com, mode, pesan);
+                loadgrid();
+
                 enable();
                 clear();
             }
@@ -203,9 +205,37 @@ namespace Bimbel_2
             
         }
 
+       
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // loadharga();
+
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadharga();
+            loaddetail();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CurrentRow.Selected = true;
+
+            id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            textBox1.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+            textBox3.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+            textBox5.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            textBox6.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+
+            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+            comboBox1.SelectedValue = Convert.ToUInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

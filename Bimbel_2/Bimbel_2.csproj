@@ -130,6 +130,24 @@
     <Compile Include="MasterSiswa.Designer.cs">
       <DependentUpon>MasterSiswa.cs</DependentUpon>
     </Compile>
+    <Compile Include="PilihKelas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PilihKelas.Designer.cs">
+      <DependentUpon>PilihKelas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PilihPaket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PilihPaket.Designer.cs">
+      <DependentUpon>PilihPaket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PilihSiswa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PilihSiswa.Designer.cs">
+      <DependentUpon>PilihSiswa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrasiAnggotaBimbel.cs">
@@ -186,6 +204,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterSiswa.resx">
       <DependentUpon>MasterSiswa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PilihKelas.resx">
+      <DependentUpon>PilihKelas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PilihPaket.resx">
+      <DependentUpon>PilihPaket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PilihSiswa.resx">
+      <DependentUpon>PilihSiswa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -21,5 +21,10 @@ namespace Bimbel_2
         {
             new KategoriAngsuran().Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new TambahAngsuran().Show();
+        }
     }
 }

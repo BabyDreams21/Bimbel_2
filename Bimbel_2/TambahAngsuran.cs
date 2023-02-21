@@ -16,5 +16,12 @@ namespace Bimbel_2
         {
             InitializeComponent();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PilihSiswa siswa = new PilihSiswa();
+            siswa.ShowDialog();
+            textBox1.Text = siswa.namasiswa;
+        }
     }
 }

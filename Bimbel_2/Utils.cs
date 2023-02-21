@@ -20,14 +20,20 @@ namespace Bimbel_2
     {
         public static DataTable GetData(String com)
         {
-            SqlConnection con = new SqlConnection(utils.con);
-            
-            SqlCommand cmd = new SqlCommand(com,con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt= new DataTable();
-            
-            da.Fill(dt);
-            return dt;
+            //SqlConnection con = new SqlConnection(utils.con);
+
+            //SqlCommand cmd = new SqlCommand(com, con);
+            //SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //DataTable dt = new DataTable();
+
+            //da.Fill(dt);
+            //return dt;
+
+            SqlConnection connection = new SqlConnection(utils.con);
+            SqlDataAdapter adapter = new SqlDataAdapter(com, connection);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            return table;
 
         }
         public static void Exec(String com)

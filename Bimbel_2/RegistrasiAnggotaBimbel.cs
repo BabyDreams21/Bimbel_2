@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Bimbel_2
 {
     public partial class RegistrasiAnggotaBimbel : Form
     {
-        MySql
+        //MySqlConnection conN = new MySqlConnection("Data Source = ;Initial Catalog = db;Integrated Security = true; ");
         public int harga;
         int id;
         int cond = 0;
@@ -197,6 +198,24 @@ namespace Bimbel_2
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (cond == 1 || val())
+            {
+                try
+                {
+
+                }
+                catch
+                {
+
+                }fian
+            }else if ( cond == 2 || valup())
+            {
+
+            }
         }
     }
 }

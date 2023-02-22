@@ -211,7 +211,7 @@ namespace Bimbel_2
                 catch
                 {
 
-                }fian
+                }
             }else if ( cond == 2 || valup())
             {
 

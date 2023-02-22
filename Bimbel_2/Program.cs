@@ -16,7 +16,7 @@ namespace Bimbel_2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RegistrasiAnggotaBimbel());
+            Application.Run(new Form1());
         }
     }
 }

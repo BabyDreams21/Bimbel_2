@@ -19,6 +19,7 @@ namespace Bimbel_2
         }
 
         public string paket;
+        public string harga;
 
         void loadgrid()
         {
@@ -36,6 +37,7 @@ namespace Bimbel_2
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
             paket = row.Cells["nama"].Value.ToString();
+            harga = row.Cells["harga"].Value.ToString();
             this.Close();
 
 
@@ -46,6 +48,14 @@ namespace Bimbel_2
             get
             {
                 return paket;
+            }
+        }
+
+        public String harga_paket
+        {
+            get
+            {
+                return harga;
             }
         }
     }

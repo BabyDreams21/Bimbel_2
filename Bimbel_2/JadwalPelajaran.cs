@@ -41,11 +41,18 @@ namespace Bimbel_2
         public JadwalPelajaran()
         {
             InitializeComponent();
-            jadwal.Add("minggu1", minggu );
-           // jadwal["minggu1"].Add("senin", "ipa");
-            buatJadwal(Sesi1, jadwalSesi1);
+           // jadwal.Add("minggu1", minggu );
+           //// jadwal["minggu1"].Add("senin", "ipa");
+           // buatJadwal(Sesi1, jadwalSesi1);
             //buatJadwal(Sesi2, jadwalSesi2);
           //  MessageBox.Show(buatJadwal(Sesi1, jadwalSesi1));
+        }
+
+        void loadgrid()
+        {
+            int id  ;
+            string[] sesi = { "Sesi 1", "Sesi 2" };
+            string com = "SELECT * FROM view_jadwal WHERE id ";
         }
 
         private void button4_Click(object sender, EventArgs e)

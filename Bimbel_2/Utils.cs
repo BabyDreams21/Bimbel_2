@@ -13,7 +13,7 @@ namespace Bimbel_2
 {
     class utils
     {
-        public static string con = " Data Source = DESKTOP-M5SO53H\\SQLEXPRESS;Initial Catalog = bimbel_smknasional;Integrated Security = true;";
+        public static string con = " Data Source = POSEIDON\\POSEIDON;Initial Catalog = bimbel_smknasional;Integrated Security = true;";
     }
 
     class Command

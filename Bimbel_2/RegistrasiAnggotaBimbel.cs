@@ -13,6 +13,8 @@ namespace Bimbel_2
 {
     public partial class RegistrasiAnggotaBimbel : Form
     {
+        MySql
+        public int harga;
         int id;
         int cond = 0;
         SqlConnection con = new SqlConnection(utils.con);
@@ -126,9 +128,15 @@ namespace Bimbel_2
             button4.Enabled = false;
         }
 
-        void loadharga()
+        int loadharga()
         {
-
+            int diskon;
+            diskon = Convert.ToInt32(textBox3.Text);
+            int afterdis = harga - (harga * diskon / 100);
+            textBox2.Text = afterdis.ToString();
+            return afterdis;
+                
+          // textBox2.Text = pkt.harga_paket;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -151,6 +159,7 @@ namespace Bimbel_2
             PilihPaket pkt = new PilihPaket();
             pkt.ShowDialog();
             textBox5.Text = pkt.nama_paket;
+            harga = Convert.ToInt32(pkt.harga_paket);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -170,6 +179,23 @@ namespace Bimbel_2
         {
             cond = 1;
             enable();
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            loadharga();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string com = "Delete  admin where id_admin=" + id;
+            string mode = "Delete";
+            CRUD.crud(com, mode);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

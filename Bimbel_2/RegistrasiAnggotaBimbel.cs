@@ -30,8 +30,17 @@ namespace Bimbel_2
             disable();
             loadgrid();
             loadangsuran();
-         
+            hidecell();
            // loadharga();
+        }
+
+        void hidecell()
+        {
+            dataGridView1.Columns[0].Visible= false;
+            dataGridView1.Columns[1].Visible= false;
+            dataGridView1.Columns[2].Visible= false;
+            dataGridView1.Columns[3].Visible= false;
+            dataGridView1.Columns[4].Visible= false;
         }
 
         bool numeric()
@@ -224,9 +233,37 @@ namespace Bimbel_2
             
         }
 
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CurrentRow.Selected= true;
+            id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            idsiswa = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
+            idkelas = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[2].Value);
+            idpaket = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[3].Value);
+            comboBox2.SelectedValue = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[4].Value);
+
+            dateTimePicker1.Value = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells[9].Value);
+            textBox1.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+            textBox5.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[10].Value.ToString();
+            comboBox2.Text = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
+            comboBox3.Text = dataGridView1.SelectedRows[0].Cells[11].Value.ToString();
+            textBox3.Text = dataGridView1.SelectedRows[0].Cells[12].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedRows[0].Cells[13].Value.ToString();
+            textBox6.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            cond = 2;
+            enable();
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            string com = "Delete  admin where id_admin=" + id;
+            string com = "Delete  Pendaftaran where idpendaftaran=" + id;
             string mode = "Delete";
             CRUD.crud(com, mode);
         }
@@ -238,18 +275,72 @@ namespace Bimbel_2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (cond == 1 && val() && numeric())
+            if (cond == 1 && val() )
             {
-                
-                    string com = "INSERT INTO Pendaftaran values ('" +idsiswa+ "','" +idpaket + "','" + idkelas + "','" + comboBox2.SelectedValue + "','" + Convert.ToDateTime(dateTimePicker1.Value) + "','" + comboBox1.Text + "','"+comboBox3.Text+"','"+textBox3.Text+"','"+textBox2.Text+"')";
-                    string mode = "Insert";
-                    string pesan = "Insert";
+                cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,tgl_registrasi,tipe_bayar,pilihan_hari,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@regis,@tipe,@pilih,@diskon,@total)", con);
+                cmd.Parameters.AddWithValue("@siswa", idsiswa);
+                cmd.Parameters.AddWithValue("@paket", idpaket);
+                cmd.Parameters.AddWithValue("@kelas", idkelas);
+                cmd.Parameters.AddWithValue("@jenis", comboBox2.SelectedValue);
+                cmd.Parameters.AddWithValue("@regis", dateTimePicker1.Value);
+                cmd.Parameters.AddWithValue("@tipe", comboBox1.Text);
+                cmd.Parameters.AddWithValue("@pilih", comboBox3.Text);
+                cmd.Parameters.AddWithValue("@diskon", textBox3.Text);
+                cmd.Parameters.AddWithValue("@total", textBox2.Text);
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Succes");
+                    clear();
+                    loadgrid();
+                    disable();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { con.Close(); }
+
+                //string com = "INSERT INTO Pendaftaran values ('" + idsiswa + "','" + idpaket + "','" + idkelas + "','" + comboBox2.SelectedValue + "','"+ dateTimePicker1.Value + "','" + comboBox1.Text + "','" + comboBox3.Text + "','" + textBox3.Text + "','" + textBox2.Text + "')";
+
+                //string mode = "Insert";
+                //string pesan = "Insert";
 
 
-                    CRUD.crud(com, mode, pesan);
-              
-            }else if ( cond == 2 && valup()&& numeric())
+                //CRUD.crud(com, mode, pesan);
+                //cmd = new SqlCommand("INSERT INTO Pendaftaran values ('" + idsiswa + "','" + idpaket + "','" + idkelas + "','" + comboBox2.SelectedValue + "','" + dateTimePicker1.Value + "','" + comboBox1.Text + "','" + comboBox3.Text + "','" + textBox3.Text + "','" + textBox2.Text + "')", con);
+                //try
+                //{
+                //    con.Open();
+                //    cmd.ExecuteNonQuery();
+                //    clear();
+                //    loadgrid();
+                //    disable();
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(""+ex.Message);
+                //}
+                //finally { con.Close(); }
+
+                //clear();
+                //loadgrid();
+                //disable();
+
+            }
+            else if ( cond == 2 && valup())
             {
+                string com = "Update pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi ='"+dateTimePicker1.Value+"',tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.Text+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran =  "+id;
+                string mode = "Insert";
+                string pesan = "Insert";
+
+
+                CRUD.crud(com, mode, pesan);
+                clear();
+                loadgrid();
+                disable();
 
             }
         }

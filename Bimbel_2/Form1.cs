@@ -33,7 +33,7 @@ namespace Bimbel_2
             using (var client = new HttpClient())
             {
                 HttpClient htpClient = new HttpClient();
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:44309/api/GetAdmins");
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://ad1e-110-137-101-136.ap.ngrok.io/api/GetAdmins");
                 HttpResponseMessage response = await client.SendAsync(request);
                 string responseContent = await response.Content.ReadAsStringAsync();
                 MyData[] myData = JsonConvert.DeserializeObject<MyData[]>(responseContent);

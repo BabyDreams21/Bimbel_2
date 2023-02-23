@@ -13,6 +13,7 @@ namespace Bimbel_2
     public partial class PilihKelas : Form
     {
         public string kelas;
+        public int idkelas;
         public PilihKelas()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace Bimbel_2
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
             kelas = row.Cells["nama"].Value.ToString();
+            idkelas = Convert.ToInt32(row.Cells["idkelas"].Value);
             dataGridView1.AutoSizeColumnsMode= DataGridViewAutoSizeColumnsMode.Fill;
             this.Close();
         }
@@ -36,6 +38,11 @@ namespace Bimbel_2
         public string namakelas
         {
             get { return kelas; }
+        }
+
+        public int getidkelas
+        {
+            get { return idkelas; }
         }
     }
 }

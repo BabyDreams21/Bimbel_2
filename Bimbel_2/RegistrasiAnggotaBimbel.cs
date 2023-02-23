@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Bimbel_2
 {
@@ -16,7 +17,8 @@ namespace Bimbel_2
     {
         //MySqlConnection conN = new MySqlConnection("Data Source = ;Initial Catalog = db;Integrated Security = true; ");
         public int harga;
-        int id;
+        int id,idsiswa,idkelas,idpaket;
+        int temp;
         int cond = 0;
         SqlConnection con = new SqlConnection(utils.con);
         SqlCommand cmd;
@@ -28,6 +30,30 @@ namespace Bimbel_2
             disable();
             loadgrid();
             loadangsuran();
+         
+           // loadharga();
+        }
+
+        bool numeric()
+        {
+          
+                try
+                {
+                    int temp = Convert.ToInt32(textBox3.Text);
+                    return true;
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please provide number only", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                return true;
+            
+            
+
+
         }
 
         bool val()
@@ -37,6 +63,7 @@ namespace Bimbel_2
                 MessageBox.Show("All field must be filled!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+           
             else
             {
                 cmd = new SqlCommand("Select * from Pendaftaran where idpendaftaran = '" +id+ "'", con);
@@ -93,7 +120,7 @@ namespace Bimbel_2
         {
             string com = "Select * from Jenis_Angsuran";
             comboBox2.DisplayMember = "nama";
-            comboBox2.ValueMember = "idmatapelajaran";
+            comboBox2.ValueMember = "idjenisangsuran";
             comboBox2.DataSource = Command.GetData(com);
 
         }
@@ -131,13 +158,13 @@ namespace Bimbel_2
 
         int loadharga()
         {
-            int diskon;
+            int diskon = 0;
             diskon = Convert.ToInt32(textBox3.Text);
             int afterdis = harga - (harga * diskon / 100);
             textBox2.Text = afterdis.ToString();
             return afterdis;
-                
-          // textBox2.Text = pkt.harga_paket;
+
+            // textBox2.Text = pkt.harga_paket;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -152,6 +179,7 @@ namespace Bimbel_2
             plh.ShowDialog();
            // textBox1.Text = PilihSiswa.ambilidsiswa();
             textBox1.Text = plh.namasiswa;
+            idsiswa = plh.idsiswa;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -161,6 +189,8 @@ namespace Bimbel_2
             pkt.ShowDialog();
             textBox5.Text = pkt.nama_paket;
             harga = Convert.ToInt32(pkt.harga_paket);
+            idpaket = pkt.getidpaket;
+           // loadharga();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -168,6 +198,7 @@ namespace Bimbel_2
             PilihKelas kls = new PilihKelas();
             kls.ShowDialog();
             textBox6.Text = kls.namakelas;
+            idkelas = kls.getidkelas;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -185,7 +216,12 @@ namespace Bimbel_2
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            loadharga();
+            if (numeric())
+            {
+                loadharga();
+            }
+            
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -202,17 +238,17 @@ namespace Bimbel_2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (cond == 1 || val())
+            if (cond == 1 && val() && numeric())
             {
-                try
-                {
+                
+                    string com = "INSERT INTO Pendaftaran values ('" +idsiswa+ "','" +idpaket + "','" + idkelas + "','" + comboBox2.SelectedValue + "','" + Convert.ToDateTime(dateTimePicker1.Value) + "','" + comboBox1.Text + "','"+comboBox3.Text+"','"+textBox3.Text+"','"+textBox2.Text+"')";
+                    string mode = "Insert";
+                    string pesan = "Insert";
 
-                }
-                catch
-                {
 
-                }
-            }else if ( cond == 2 || valup())
+                    CRUD.crud(com, mode, pesan);
+              
+            }else if ( cond == 2 && valup()&& numeric())
             {
 
             }

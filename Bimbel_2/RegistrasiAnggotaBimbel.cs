@@ -58,8 +58,7 @@ namespace Bimbel_2
                     MessageBox.Show("Please provide number only", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                return true;
-            
+                
             
 
 
@@ -67,12 +66,11 @@ namespace Bimbel_2
 
         bool val()
         {
-            if (textBox1.Text.Length < 1 || textBox2.Text.Length < 1 || textBox3.Text.Length < 1 || textBox5.Text.Length < 1 || textBox6.Text.Length < 1)
+            if (textBox1.Text.Length < 1 || /*textBox2.Text.Length < 1 ||*/ textBox3.Text.Length < 1 || textBox5.Text.Length < 1 || textBox6.Text.Length < 1)
             {
                 MessageBox.Show("All field must be filled!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-           
             else
             {
                 cmd = new SqlCommand("Select * from Pendaftaran where idpendaftaran = '" +id+ "'", con);
@@ -225,10 +223,10 @@ namespace Bimbel_2
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (numeric())
-            {
-                loadharga();
-            }
+            //if (numeric())
+            //{
+            //    loadharga();
+            //}
             
             
         }
@@ -266,6 +264,9 @@ namespace Bimbel_2
             string com = "Delete  Pendaftaran where idpendaftaran=" + id;
             string mode = "Delete";
             CRUD.crud(com, mode);
+            loadgrid();
+            clear();
+            enable();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -275,7 +276,7 @@ namespace Bimbel_2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (cond == 1 && val() )
+            if (cond == 1 && val() && numeric() )
             {
                 cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,tgl_registrasi,tipe_bayar,pilihan_hari,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@regis,@tipe,@pilih,@diskon,@total)", con);
                 cmd.Parameters.AddWithValue("@siswa", idsiswa);
@@ -330,7 +331,7 @@ namespace Bimbel_2
                 //disable();
 
             }
-            else if ( cond == 2 && valup())
+            else if ( cond == 2 && valup()&& numeric())
             {
                 string com = "Update pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi ='"+dateTimePicker1.Value+"',tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.Text+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran =  "+id;
                 string mode = "Insert";

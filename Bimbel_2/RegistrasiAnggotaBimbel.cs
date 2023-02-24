@@ -333,12 +333,19 @@ namespace Bimbel_2
             }
             else if ( cond == 2 && valup()&& numeric())
             {
-                string com = "Update pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi ='"+dateTimePicker1.Value+"',tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.Text+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran =  "+id;
-                string mode = "Insert";
-                string pesan = "Insert";
+              cmd  = new SqlCommand ("Update Pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi =@date,tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.Text+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran = '"+id+"' ",con);
+                cmd.Parameters.AddWithValue("@date", dateTimePicker1.Value);
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Succes");
+                }catch(Exception ex) { MessageBox.Show(ex.ToString()); 
+                }finally { con.Close(); }   
+               
 
 
-                CRUD.crud(com, mode, pesan);
+                //CRUD.crud(com, mode, pesan);
                 clear();
                 loadgrid();
                 disable();

@@ -30,13 +30,13 @@ namespace Bimbel_2
 
         void loadgrid()
         {
-            string com = "select * from vw_siswa";
+            string com = "select * from Siswa";
             dataGridView1.DataSource = Command.GetData(com);
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            string com = "Select * from vw_siswa where nama like '%" + textBox4.Text + "%' or NIS like '%" + textBox4.Text + "%'";
+            string com = "Select * from Siswa where nama like '%" + textBox4.Text + "%' or NIS like '%" + textBox4.Text + "%'";
             dataGridView1.DataSource = Command.GetData(com);
         }
 
@@ -45,7 +45,7 @@ namespace Bimbel_2
             try
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                idpendaftaran = Convert.ToInt32(row.Cells["idpendaftaran"].Value.ToString());
+               // idpendaftaran = Convert.ToInt32(row.Cells["idpendaftaran"].Value.ToString());
                 siswa = row.Cells["nama"].Value.ToString();
                 idsiswa = Convert.ToInt32(row.Cells["id_siswa"].Value.ToString());
                 this.Close();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataTable = System.Data.DataTable;
 
 namespace Bimbel_2
 {
@@ -86,6 +88,18 @@ namespace Bimbel_2
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        void filter()
+        {
+            string selectedColumn = comboBox1.SelectedItem.ToString();
+            string filterValue = textBox1.Text;
+            string query = "Select * from Siswa WHERE " + selectedColumn + " LIKE '%" + selectedColumn + "%'";
+
+            // eksekusi query dan tampilkan hasilnya pada datagrid
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            dataGridView1.DataSource = dataTable;
+        }
 
         void clear()
         {
@@ -114,6 +128,14 @@ namespace Bimbel_2
             button3.Enabled = true;
             button4.Enabled = false;
         }
+
+        private void UpdateDataGridView()
+        {
+            string selectedItem = cbFilter.SelectedItem.ToString();
+
+          
+        }
+        
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -244,6 +266,15 @@ namespace Bimbel_2
                 pictureBox1.Image = bmp;
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("Nama");
+            comboBox1.Items.Add("NIS");
+          //  comboBox1.Items.Add("Jurusan");
+
+            filter();
         }
     }
 }

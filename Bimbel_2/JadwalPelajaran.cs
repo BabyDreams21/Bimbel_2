@@ -59,7 +59,7 @@ namespace Bimbel_2
 
         void generate()
         {
-
+            cmd = new SqlCommand("select * from Mata_Pelajaran where keterangan !=1  LIMIT 1 ");
         }
 
         void loadgrid()
@@ -71,7 +71,25 @@ namespace Bimbel_2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
+            if (dataGridView1.RowCount > 0)
+            {
+                Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
+                application.Application.Workbooks.Add(Type.Missing);
+                for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                {
+                    application.Cells[1, i + 1] = dataGridView1.Columns[i].HeaderText;
+                }
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        application.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+
+                application.Columns.AutoFit();
+                application.Visible = true;
+            }
         }
         void loadadmin()
         {

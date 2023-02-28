@@ -73,7 +73,7 @@ namespace Bimbel_2
             }
             else
             {
-                cmd = new SqlCommand("Select * from Pendaftaran where idpendaftaran = '" +id+ "'", con);
+                cmd = new SqlCommand("Select * from Pendaftaran where id_siswa = '" +idsiswa+ "'", con);
                 con.Open();
                 rd = cmd.ExecuteReader();
                 rd.Read();
@@ -223,12 +223,12 @@ namespace Bimbel_2
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            //if (numeric())
-            //{
-            //    loadharga();
-            //}
-            
-            
+            if (numeric())
+            {
+                loadharga();
+            }
+
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

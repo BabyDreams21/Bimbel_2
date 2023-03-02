@@ -301,7 +301,7 @@ namespace Bimbel_2
         {
             if (cond == 1 && val() && numeric() )
             {
-                cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,id_sesi,tgl_registrasi,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@sesi,@regis,@tipe,@diskon,@total)", con);
+                cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,id_sesi,tgl_registrasi,tipe,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@sesi,@regis,@tipe,@diskon,@total)", con);
                 cmd.Parameters.AddWithValue("@siswa", idsiswa);
                 cmd.Parameters.AddWithValue("@paket", idpaket);
                 cmd.Parameters.AddWithValue("@kelas", idkelas);

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Bimbel_2
 {
-    internal class koneksimysql
-    {
-    }
+
+
 }

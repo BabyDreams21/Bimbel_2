@@ -138,6 +138,7 @@
     <Compile Include="KategoriAngsuran.Designer.cs">
       <DependentUpon>KategoriAngsuran.cs</DependentUpon>
     </Compile>
+    <Compile Include="koneksimysql.cs" />
     <Compile Include="MasterGuru.cs">
       <SubType>Form</SubType>
     </Compile>

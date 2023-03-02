@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Agreement;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -88,6 +89,7 @@ namespace Bimbel_2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            utils.tanda = true;
             PilihSiswa siswa = new PilihSiswa();
             siswa.ShowDialog();
             textBox1.Text = siswa.namasiswa;

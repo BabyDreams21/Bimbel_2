@@ -30,7 +30,16 @@ namespace Bimbel_2
 
         void loadgrid()
         {
-            string com = "select * from Siswa";
+            string com;
+            if (utils.tanda)
+            {
+                com = "Select * from view_transaksi";
+            }
+            else
+            {
+                com = "select * from Siswa";
+            }
+            
             dataGridView1.DataSource = Command.GetData(com);
         }
 

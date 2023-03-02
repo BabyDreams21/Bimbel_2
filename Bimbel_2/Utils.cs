@@ -13,8 +13,21 @@ namespace Bimbel_2
 {
     class utils
     {
+        public static bool tanda = true;
         public static string con = " Data Source = DESKTOP-M5SO53H\\SQLEXPRESS;Initial Catalog = bimbel_smknasional;Integrated Security = true;";
+
+        public static bool Valid(string s)
+        {
+            if (s.All(char.IsNumber))
+            {
+                return true;
+
+            }
+            return false;
+        }
     }
+
+    
 
     class Command
     {

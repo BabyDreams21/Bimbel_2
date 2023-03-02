@@ -28,9 +28,10 @@ namespace Bimbel_2
         {
             InitializeComponent();
             disable();
-            loadgrid();
+           // loadgrid();
             loadangsuran();
-            hidecell();
+          //  hidecell();
+            loadsesi();
            // loadharga();
         }
 
@@ -48,6 +49,7 @@ namespace Bimbel_2
           
                 try
                 {
+
                     int temp = Convert.ToInt32(textBox3.Text);
                     return true;
 
@@ -66,6 +68,11 @@ namespace Bimbel_2
 
         bool val()
         {
+
+            if (!utils.Valid(textBox3.Text))
+            {
+                MessageBox.Show("Ok");
+            }
             if (textBox1.Text.Length < 1 || /*textBox2.Text.Length < 1 ||*/ textBox3.Text.Length < 1 || textBox5.Text.Length < 1 || textBox6.Text.Length < 1)
             {
                 MessageBox.Show("All field must be filled!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -163,6 +170,14 @@ namespace Bimbel_2
             button4.Enabled = false;
         }
 
+        void loadsesi()
+        {
+            string com = "SELECT * FROM Sesi ";
+            comboBox3.ValueMember = "id";
+            comboBox3.DisplayMember = "nama";
+            comboBox3.DataSource = Command.GetData(com);
+        }
+
         int loadharga()
         {
             int diskon = 0;
@@ -181,7 +196,7 @@ namespace Bimbel_2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            
+            utils.tanda = false;
             PilihSiswa plh = new PilihSiswa();
             plh.ShowDialog();
            // textBox1.Text = PilihSiswa.ambilidsiswa();
@@ -223,11 +238,18 @@ namespace Bimbel_2
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (numeric())
+            //if (numeric())
+            //{
+            //    loadharga();
+            //}
+            if (!utils.Valid(textBox3.Text))
+            {
+                MessageBox.Show("Please provide number only!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
             {
                 loadharga();
             }
-
 
         }
 
@@ -239,6 +261,7 @@ namespace Bimbel_2
             idkelas = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[2].Value);
             idpaket = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[3].Value);
             comboBox2.SelectedValue = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[4].Value);
+            comboBox3.SelectedValue = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[14].Value);
 
             dateTimePicker1.Value = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells[9].Value);
             textBox1.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
@@ -278,14 +301,14 @@ namespace Bimbel_2
         {
             if (cond == 1 && val() && numeric() )
             {
-                cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,tgl_registrasi,tipe_bayar,pilihan_hari,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@regis,@tipe,@pilih,@diskon,@total)", con);
+                cmd = new SqlCommand("Insert into Pendaftaran(id_siswa,id_paket,id_kelas,id_jenis_angsuran,id_sesi,tgl_registrasi,diskon,total_bayar)values(@siswa,@paket,@kelas,@jenis,@sesi,@regis,@tipe,@diskon,@total)", con);
                 cmd.Parameters.AddWithValue("@siswa", idsiswa);
                 cmd.Parameters.AddWithValue("@paket", idpaket);
                 cmd.Parameters.AddWithValue("@kelas", idkelas);
                 cmd.Parameters.AddWithValue("@jenis", comboBox2.SelectedValue);
+                cmd.Parameters.AddWithValue("@sesi", comboBox3.SelectedValue);
                 cmd.Parameters.AddWithValue("@regis", dateTimePicker1.Value);
                 cmd.Parameters.AddWithValue("@tipe", comboBox1.Text);
-                cmd.Parameters.AddWithValue("@pilih", comboBox3.Text);
                 cmd.Parameters.AddWithValue("@diskon", textBox3.Text);
                 cmd.Parameters.AddWithValue("@total", textBox2.Text);
 
@@ -333,7 +356,7 @@ namespace Bimbel_2
             }
             else if ( cond == 2 && valup()&& numeric())
             {
-              cmd  = new SqlCommand ("Update Pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi =@date,tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.Text+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran = '"+id+"' ",con);
+              cmd  = new SqlCommand ("Update Pendaftaran set id_siswa ='"+idsiswa+"',id_paket ='"+idpaket+"',id_kelas ='"+idkelas+"',id_jenis_angsuran ='"+comboBox2.SelectedValue+"',tgl_registrasi =@date,tipe_bayar ='"+comboBox1.Text+ "',pilihan_hari ='" + comboBox3.SelectedValue+"',diskon ='"+textBox3.Text+"',total_bayar ='"+textBox2.Text+"'where idpendaftaran = '"+id+"' ",con);;
                 cmd.Parameters.AddWithValue("@date", dateTimePicker1.Value);
                 try
                 {

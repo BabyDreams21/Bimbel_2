@@ -24,7 +24,7 @@ namespace Bimbel_2
             loadadmin();
             disable();
 
-            lbladmin.Text = Session.Email.ToString();
+          //  lbladmin.Text = Session.Email.ToString();
         }
 
         bool val()

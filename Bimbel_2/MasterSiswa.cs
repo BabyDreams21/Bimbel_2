@@ -88,18 +88,7 @@ namespace Bimbel_2
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        void filter()
-        {
-            string selectedColumn = comboBox1.SelectedItem.ToString();
-            string filterValue = textBox1.Text;
-            string query = "Select * from Siswa WHERE " + selectedColumn + " LIKE '%" + selectedColumn + "%'";
-
-            // eksekusi query dan tampilkan hasilnya pada datagrid
-            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            dataGridView1.DataSource = dataTable;
-        }
+       
 
         void clear()
         {
@@ -274,7 +263,7 @@ namespace Bimbel_2
             comboBox1.Items.Add("NIS");
           //  comboBox1.Items.Add("Jurusan");
 
-            filter();
+            //filter();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Bimbel_2
            // loadgrid();
             loadangsuran();
           //  hidecell();
-            loadsesi();
+           // loadsesi();
            // loadharga();
         }
 
@@ -170,13 +170,13 @@ namespace Bimbel_2
             button4.Enabled = false;
         }
 
-        void loadsesi()
-        {
-            string com = "SELECT * FROM Sesi ";
-            comboBox3.ValueMember = "id";
-            comboBox3.DisplayMember = "nama";
-            comboBox3.DataSource = Command.GetData(com);
-        }
+        //void loadsesi()
+        //{
+        //    string com = "SELECT * FROM Sesi ";
+        //    comboBox3.ValueMember = "id";
+        //    comboBox3.DisplayMember = "nama";
+        //    comboBox3.DataSource = Command.GetData(com);
+        //}
 
         int loadharga()
         {

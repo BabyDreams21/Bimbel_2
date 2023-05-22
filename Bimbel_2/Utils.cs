@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,11 +14,23 @@ namespace Bimbel_2
 {
     class utils
     {
-        public static bool tanda = true;
-        public static string con = " Data Source = DESKTOP-M5SO53H\\SQLEXPRESS;Initial Catalog = bimbel_smknasional;Integrated Security = true;";
 
+        public static bool tanda = true ;
+        public static string con = " Data Source = POSEIDON\\POSEIDON;Initial Catalog = bimbel_smknasional;Integrated Security = true;";
+
+
+       public static bool IsValidEmail(string strIn)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strIn, "^.+@.+\\.[a-zA-Z]{2,3}$");
+        }
+        public static void Email (string s)
+        {
+           // Match match = Re
+        }
         public static bool Valid(string s)
         {
+            
             if (s.All(char.IsNumber))
             {
                 return true;

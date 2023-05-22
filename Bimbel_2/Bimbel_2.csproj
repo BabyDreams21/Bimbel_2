@@ -214,6 +214,8 @@
       <DependentUpon>TambahAngsuran.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <Compile Include="Utils1.cs" />
+    <Compile Include="Utils2.cs" />
     <EmbeddedResource Include="AngsuranSiswa.resx">
       <DependentUpon>AngsuranSiswa.cs</DependentUpon>
     </EmbeddedResource>
